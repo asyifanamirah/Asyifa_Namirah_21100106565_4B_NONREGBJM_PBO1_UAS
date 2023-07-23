@@ -1,0 +1,179 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
+package tokokain;
+
+//class
+public class TokoKain {
+    //atribut dan encapsulation
+     private String Jenis;
+     private String Harga;
+
+     //constructor
+    public TokoKain(String Jenis, String Harga) {
+        this.Jenis = Jenis;
+        this.Harga = Harga;
+    }
+    
+    //mutator (setter)
+    public void setJenis(String Jenis) {
+        this.Jenis = Jenis;
+    }
+
+    public void setHarga(String Harga) {
+        this.Harga = Harga;
+    }
+
+    
+    //accessor(getter)
+    public String getJenis() {
+        return Jenis;
+    }
+
+    public String getHarga() {
+        return Harga;
+    }
+    
+    public String displayinfo(){
+       return "Jenis :"+getJenis()+"\n  Harga  :"+getHarga();
+       
+    }
+    
+    //polymorphism (overloading)
+     
+     public String InfoPesanan(String pesanan){
+    return InfoPesanan() + "\npesanan :  "+pesanan;
+            
+            
+    }
+
+    private String InfoPesanan() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    String infopesanan() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+     
+}
+package tokokain;
+
+
+//inheritance
+public class Detailkain extends TokoKain {
+    //overriding
+    public Detailkain(String nama, String kodepesanan){
+        super(nama,kodepesanan);
+    }
+ 
+public String getKodepesanan(){
+     String kodepesanan = getKodepesanan().substring(0, 2);
+        //seleksi switch
+        return switch (kodepesanan) {
+            case "01" -> "Kain Sasirangan Biru";
+            case "02" -> "Kain Sasirangan Merah";
+            case "03" -> "Kain Katun Putih";
+            case "04" -> "Kain Batik Hitam";
+            case "05" -> "Kain Batik Putih";
+            default -> "Kain tidak ada";
+        };
+ }
+ public String getnomorpesanan(){
+     String nomorpesanan = getKodepesanan().substring(2, 4);
+        //seleksi switch
+        return switch (nomorpesanan) {
+            case "01" -> "01";
+            case "02" -> "02";
+            case "03" -> "03";
+            case "04" -> "04";
+            case "05" -> "05";
+            default -> "Nomor tidak Tersedia";
+        };
+ }
+ public String getkodekain(){
+     String kodekain = getKodepesanan().substring(4);
+        return switch (kodekain) {
+            case "01" -> "Sasirangan";
+            case "002" -> "Batik";
+            case "003" -> "Katun";
+            case "004" -> "Kain Linen";
+            case "005" -> "Kain Denim";
+            default -> "Kain Tidak Tersedia";
+        };
+    }
+    //polymorphism (overriding)
+
+    /**
+     *
+     * @return
+     */
+ @Override
+ public String infopesanan(){
+     return super.infopesanan()+
+             "\n Kode Kain: "+getkodepesanan()+
+             "\n Nomor Nomor Pesanan: "+getnomorpesanan()+
+             "\n Kode Kode Kain: "+getkodekain();
+    }
+
+    private String getkodepesanan() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    boolean InfoPesanan() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    boolean Infopesanan() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+  
+}package tokokain;
+
+import java.util.Scanner;
+
+
+public class TokoKainBersama {
+    public static void main(String[] args) {
+        
+        //object
+        //Kain Kain = new Kain("kain sasirangan"," Rp.120.000");
+        
+        //System.out.println(Kain.Infopesanan());
+       // System.out.println(Kain.Infopesanan(" Kain Sasirangan"));
+       
+       //error Handling
+       //error Handling
+       try{
+            //IO sederhana
+            Scanner scanner = new Scanner(System.in);
+
+            //Array
+            Detailkain[] kain = new Detailkain[2];
+
+
+            //perulangan biasa
+            for(int i=0; i<kain.length; i++){
+                 System.out.print("Masukkan Jenis Kain  "+(i+1)+" : ");
+                 String Jenis_kain = scanner.nextLine();
+                 System.out.print("Masukkan Kode Kain "+(i+1)+" : ");
+                 String Kode_kain = scanner.nextLine();
+
+                 //object
+                 kain[i] = new Detailkain (Jenis_kain,Kode_kain);
+            }
+
+            //perulangan array
+            for(Detailkain data: kain){
+                System.out.println("_____________________________");
+                System.out.println("=====DATA PENJUALAN KAIN=====");
+                 System.out.println(data.Infopesanan());
+            }
+       } catch (NumberFormatException e){
+           System.out.println("Error Nomer : "+e.getMessage());
+       } catch (StringIndexOutOfBoundsException e){
+           System.out.println("Error Kode kain : "+e.getMessage());
+       } catch (Exception e){
+            System.out.println("Error umum: "+e.getMessage());
+    }
+    }
